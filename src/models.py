@@ -15,40 +15,43 @@ class User(Base):
     password = Column(String(250), nullable=False)
 
 class Characters(Base):
-    __tablename__ = 'Characters'
+    __tablename__ = 'characters'
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
     lastname = Column(String(250), nullable=False)
     specie = Column(String(250), nullable=False)
     world = Column(String(250), nullable=False)
     gender = Column(String(250), nullable=False)
+    relacion = relationship ('favorites_characters')
 
 class planets(Base):
-    __tablename__ = 'Planets'
+    __tablename__ = 'planets'
     id = Column(Integer, primary_key=True)
     world = Column(String(250), nullable=False)
     lenguage = Column(String(250), nullable=False)
+    relacion = relationship ('favorites_planets')
 
 
-class Starships(Base):
-    __tablename__ = 'Starship'
+class starships(Base):
+    __tablename__ = 'starships'
     id = Column(Integer, primary_key=True)
     models = Column(String(250), nullable=False)
+    relacion = relationship ('favorites_starships')
 
-class Favorites_Characters(Base):
-    __tablename__ = 'Favorites Characters'
+class favorites_characters(Base):
+    __tablename__ = 'favorites_characters'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'))
     characters_id = Column(Integer, ForeignKey('characters.id'))
 
-class Favorites_Planets(Base):
-    __tablename__ = 'Favorites Planets'
+class favorites_planets(Base):
+    __tablename__ = 'favorites_planets'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'))
     planets_id = Column(Integer, ForeignKey('planets.id'))
 
-class Favorites_Starships(Base):
-    __tablename__ = 'Favorites startships'
+class favorites_starships(Base):
+    __tablename__ = 'favorites_starships'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'))
     starships_id = Column(Integer, ForeignKey('starships.id'))
